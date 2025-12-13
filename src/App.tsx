@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { useAuthStore } from './store/authStore';
 import './styles/App.css';
@@ -17,7 +17,9 @@ import AstraKaksha from './pages/AstraKaksha';
 // Loading Screen Page (after login)
 const LoadingGamePage: React.FC = () => {
   const { isAuthenticated } = useAuthStore();
+  const navigate = useNavigate();
   const [loadingProgress, setLoadingProgress] = React.useState(0);
+  const [isComplete, setIsComplete] = React.useState(false);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -34,11 +36,19 @@ const LoadingGamePage: React.FC = () => {
   }, []);
 
   const handleComplete = () => {
-    window.location.href = '/dashboard';
+    setIsComplete(true);
+    // Use React Router navigate instead of window.location
+    navigate('/dashboard', { replace: true });
   };
 
+  // Redirect to login if not authenticated
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
+  }
+
+  // Redirect to dashboard if already complete
+  if (isComplete) {
+    return <Navigate to="/dashboard" replace />;
   }
 
   return (

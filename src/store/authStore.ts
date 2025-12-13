@@ -24,13 +24,17 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       otpSent: false,
       otpEmail: '',
-      login: (user) => set({ isAuthenticated: true, user, otpSent: false }),
+      login: (user) => set({ isAuthenticated: true, user, otpSent: false, otpEmail: '' }),
       logout: () => set({ isAuthenticated: false, user: null, otpSent: false, otpEmail: '' }),
       setOtpSent: (sent, email) => set({ otpSent: sent, otpEmail: email }),
     }),
     {
       name: 'astra-auth',
       storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({ 
+        isAuthenticated: state.isAuthenticated, 
+        user: state.user 
+      }),
     }
   )
 );
