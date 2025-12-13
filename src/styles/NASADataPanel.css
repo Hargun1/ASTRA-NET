@@ -1,0 +1,545 @@
+/* ============================================
+   NASA Data Panel Styles
+   Live NASA API Data Display
+   ============================================ */
+
+.nasa-panel {
+  background: linear-gradient(135deg, rgba(10, 25, 47, 0.95) 0%, rgba(5, 15, 30, 0.98) 100%);
+  border: 1px solid rgba(0, 82, 204, 0.3);
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nasa-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0052cc, #00a3ff, #0052cc, transparent);
+}
+
+.nasa-panel.loading,
+.nasa-panel.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  gap: 16px;
+}
+
+.nasa-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.loader-ring {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(0, 163, 255, 0.2);
+  border-top-color: #00a3ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.nasa-loader span,
+.nasa-panel.error span {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.nasa-panel.error button {
+  padding: 8px 20px;
+  background: rgba(0, 82, 204, 0.3);
+  border: 1px solid rgba(0, 163, 255, 0.5);
+  border-radius: 8px;
+  color: #00a3ff;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nasa-panel.error button:hover {
+  background: rgba(0, 82, 204, 0.5);
+}
+
+/* Header */
+.nasa-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nasa-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nasa-logo {
+  height: 24px;
+  width: auto;
+  filter: brightness(1.2);
+}
+
+.nasa-title span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.live-badge {
+  font-size: 10px;
+  color: #22c55e;
+  font-weight: 600;
+  padding: 3px 8px;
+  background: rgba(34, 197, 94, 0.15);
+  border-radius: 4px;
+}
+
+.nasa-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.last-updated {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.refresh-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.refresh-btn:disabled {
+  animation: spin 1s linear infinite;
+}
+
+/* Content Grid */
+.nasa-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.nasa-panel.compact .nasa-content {
+  grid-template-columns: 1fr;
+}
+
+/* Sections */
+.nasa-section {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.section-icon {
+  font-size: 16px;
+}
+
+/* NEO Section */
+.neo-stats {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.neo-stat {
+  flex: 1;
+  padding: 14px;
+  background: rgba(0, 163, 255, 0.08);
+  border: 1px solid rgba(0, 163, 255, 0.2);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.neo-stat.hazardous {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.stat-number {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: #00a3ff;
+  font-family: 'SF Mono', monospace;
+}
+
+.neo-stat.hazardous .stat-number {
+  color: #ef4444;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.asteroid-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.asteroid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.asteroid-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(0, 163, 255, 0.2);
+}
+
+.asteroid-item.hazardous {
+  border-left: 3px solid #ef4444;
+}
+
+.asteroid-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.asteroid-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hazard-icon {
+  font-size: 12px;
+}
+
+.asteroid-date {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.asteroid-metrics {
+  display: flex;
+  gap: 16px;
+}
+
+.asteroid-metrics .metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metric-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: #00a3ff;
+  font-family: 'SF Mono', monospace;
+}
+
+.metric-label {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+}
+
+/* Solar Section */
+.cme-card {
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(255, 170, 0, 0.08) 0%, rgba(255, 100, 0, 0.05) 100%);
+  border: 1px solid rgba(255, 170, 0, 0.2);
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+.cme-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cme-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffaa00;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.earth-directed {
+  font-size: 10px;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.cme-details {
+  display: flex;
+  gap: 20px;
+}
+
+.cme-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cme-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffaa00;
+  font-family: 'SF Mono', monospace;
+}
+
+.cme-label {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+}
+
+/* Flare List */
+.flare-list {
+  margin-top: 14px;
+}
+
+.flare-list h4 {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.flare-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  margin-bottom: 6px;
+  border-left: 3px solid transparent;
+}
+
+.flare-item.low { border-left-color: #22c55e; }
+.flare-item.moderate { border-left-color: #f59e0b; }
+.flare-item.high { border-left-color: #ef4444; }
+.flare-item.extreme { border-left-color: #dc2626; }
+
+.flare-class {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'SF Mono', monospace;
+  padding: 4px 10px;
+  border-radius: 4px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.flare-class.c { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+.flare-class.m { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+.flare-class.x { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+.flare-region {
+  flex: 1;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.flare-time {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.no-data {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+  padding: 20px;
+}
+
+/* GST Card */
+.gst-card {
+  margin-top: 14px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 10px;
+}
+
+.gst-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.gst-icon {
+  font-size: 16px;
+}
+
+.gst-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8b5cf6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gst-kp {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.kp-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #8b5cf6;
+  font-family: 'SF Mono', monospace;
+}
+
+.kp-scale {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* APOD Section */
+.apod-card {
+  overflow: hidden;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.apod-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.apod-video {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+}
+
+.apod-info {
+  padding: 14px;
+}
+
+.apod-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.apod-desc {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Footer */
+.nasa-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.nasa-footer a {
+  color: #00a3ff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nasa-footer a:hover {
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nasa-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .neo-stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .asteroid-metrics {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .cme-details {
+    flex-wrap: wrap;
+  }
+}

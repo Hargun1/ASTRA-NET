@@ -1,0 +1,1272 @@
+/* ============================================
+   ASTRA ADITYA - Solar Monitoring
+   Minimal • Sophisticated • Smooth
+   ============================================ */
+
+.astra-aditya {
+  min-height: 100vh;
+  position: relative;
+  background: #030608;
+}
+
+.aditya-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 20% 30%, rgba(212, 180, 117, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(245, 158, 11, 0.03) 0%, transparent 50%);
+  z-index: 0;
+}
+
+/* ============ Header ============ */
+.aditya-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 32px;
+  background: rgba(3, 6, 8, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.alert-level-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid;
+  border-radius: 20px;
+}
+
+.alert-level-badge .alert-icon {
+  font-size: 12px;
+}
+
+.alert-level-badge .alert-text {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.back-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.header-center {
+  text-align: center;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.page-title .icon {
+  font-size: 20px;
+}
+
+.page-subtitle {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: rgba(212, 180, 117, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d4b475;
+  animation: soft-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes soft-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ============ Main Content ============ */
+.aditya-content {
+  position: relative;
+  z-index: 10;
+  padding: 28px;
+}
+
+.aditya-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr 320px;
+  gap: 20px;
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+.left-panel,
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ============ Panel Base ============ */
+.panel {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  padding: 22px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.panel-title {
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+}
+
+/* ============ Activity Panel ============ */
+.activity-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.gauge-ring {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.gauge-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.gauge-ring .bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.04);
+  stroke-width: 6;
+}
+
+.gauge-ring .fill {
+  fill: none;
+  stroke: #d4b475;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gauge-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.gauge-value {
+  font-size: 32px;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'SF Mono', monospace;
+}
+
+.gauge-label {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.activity-status {
+  padding: 6px 14px;
+  background: rgba(212, 180, 117, 0.08);
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 500;
+  color: #d4b475;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ============ Solar Wind Panel ============ */
+.metrics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.metric-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.metric-item:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.metric-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.metric-name {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'SF Mono', monospace;
+}
+
+.metric-unit {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  margin-left: 4px;
+  font-weight: 400;
+}
+
+.metric-trend {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ============ Flare Panel ============ */
+.flare-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.flare-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.flare-item:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.flare-class {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'SF Mono', monospace;
+}
+
+.flare-details {
+  flex: 1;
+}
+
+.flare-time {
+  font-size: 11px;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.flare-region {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.flare-severity {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ============ Sun Visualization ============ */
+.sun-container {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.sun-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.sun-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.sun-coords {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: 'SF Mono', monospace;
+}
+
+.sun-wrapper {
+  flex: 1;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(212, 180, 117, 0.03) 0%, transparent 60%);
+}
+
+.sun-controls {
+  padding: 12px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.sun-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.control-value {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  font-family: 'SF Mono', monospace;
+}
+
+.control-label {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ============ CME Panel ============ */
+.cme-tracker {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cme-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cme-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cme-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: soft-pulse 2s ease-in-out infinite;
+}
+
+.cme-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+.cme-value {
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'SF Mono', monospace;
+}
+
+.cme-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.cme-detail {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+
+.detail-label {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.detail-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'SF Mono', monospace;
+}
+
+/* ============ Impact Panel ============ */
+.impact-zones {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.impact-zone {
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+}
+
+.zone-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.zone-icon {
+  font-size: 16px;
+}
+
+.zone-name {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.zone-status {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.zone-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.zone-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============ Activity Chart ============ */
+.chart-panel {
+  margin-top: 20px;
+}
+
+.chart-container {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.chart-title {
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.chart-wrapper {
+  height: 200px;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 1400px) {
+  .aditya-grid {
+    grid-template-columns: 280px 1fr 280px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .aditya-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sun-container {
+    order: -1;
+  }
+  
+  .sun-wrapper {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aditya-header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .aditya-content {
+    padding: 16px;
+  }
+}
+
+/* Scrollbar for panels */
+.flare-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.flare-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.flare-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+/* ============ NEW: Panel Header ============ */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.panel-header .panel-title {
+  margin-bottom: 0;
+}
+
+.data-source {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.data-source .source-icon {
+  font-size: 10px;
+}
+
+.nasa-live-badge {
+  font-size: 8px;
+  font-weight: 700;
+  color: #00a3ff;
+  background: rgba(0, 163, 255, 0.15);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(0, 163, 255, 0.3);
+}
+
+.nasa-loading {
+  font-size: 8px;
+  color: #f59e0b;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ============ NEW: SAI Metrics ============ */
+.sai-metrics {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sai-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.sai-metric .metric-label {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sai-metric .metric-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'SF Mono', monospace;
+}
+
+/* ============ NEW: Prediction Panel ============ */
+.prediction-panel {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(255, 255, 255, 0.015));
+}
+
+.prediction-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.prediction-main {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.prediction-time {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+}
+
+.time-icon {
+  font-size: 24px;
+}
+
+.time-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.time-label {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.time-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #8b5cf6;
+}
+
+.prediction-confidence {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.conf-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  min-width: 70px;
+}
+
+.conf-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.conf-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8b5cf6, #a78bfa);
+  border-radius: 3px;
+}
+
+.conf-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: #a78bfa;
+  min-width: 35px;
+  text-align: right;
+}
+
+.prediction-class {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 10px;
+}
+
+.class-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.class-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #a78bfa;
+}
+
+/* ============ NEW: Solar Heatmap ============ */
+.heatmap-panel {
+  grid-column: span 1;
+}
+
+.solar-heatmap {
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.sun-surface {
+  position: relative;
+  min-height: 300px;
+}
+
+.active-region {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.active-region .region-marker {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid;
+  transition: all 0.3s ease;
+}
+
+.active-region.low .region-marker {
+  border-color: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+}
+
+.active-region.moderate .region-marker {
+  border-color: #f59e0b;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
+.active-region.high .region-marker {
+  border-color: #dc2626;
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+}
+
+.active-region.extreme .region-marker {
+  border-color: #ff0000;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+.active-region.selected .region-marker {
+  transform: scale(1.3);
+}
+
+.active-region .region-label {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+}
+
+.region-info-panel {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.region-info-panel h3 {
+  font-size: 12px;
+  color: #fff;
+  margin: 0 0 6px 0;
+}
+
+.region-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.heatmap-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.heatmap-legend .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.heatmap-legend .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.heatmap-legend .dot.low { background: #22c55e; }
+.heatmap-legend .dot.moderate { background: #f59e0b; }
+.heatmap-legend .dot.high { background: #dc2626; }
+.heatmap-legend .dot.extreme { background: #ff0000; }
+
+/* ============ NEW: CME Tracker ============ */
+.cme-tracker-panel {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.03), rgba(255, 255, 255, 0.015));
+}
+
+.cme-visualization {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cme-path {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+}
+
+.sun-marker, .earth-marker {
+  font-size: 32px;
+}
+
+.path-line {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cme-particle {
+  position: absolute;
+  top: -6px;
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle, #f59e0b, transparent);
+  border-radius: 50%;
+}
+
+.cme-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.cme-stat {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+
+.cme-stat .stat-label {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.cme-stat .stat-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.cme-stat .stat-value.alert {
+  color: #f59e0b;
+}
+
+.cme-stat .stat-value.safe {
+  color: #22c55e;
+}
+
+.cme-stat.highlight {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+/* ============ NEW: Alert Levels Panel ============ */
+.alert-levels-panel {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.03), rgba(255, 255, 255, 0.015));
+}
+
+.alert-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alert-level-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.alert-level-item.active {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.alert-level-item .level-icon {
+  font-size: 18px;
+}
+
+.alert-level-item .level-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  flex: 1;
+}
+
+.alert-level-item .level-desc {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ============ NEW: Source Panel ============ */
+.source-panel {
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.03), rgba(255, 255, 255, 0.015));
+}
+
+.source-content {
+  text-align: center;
+}
+
+.source-label {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.source-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.source-main .source-icon {
+  font-size: 20px;
+}
+
+.source-main .source-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4ecdc4;
+}
+
+.source-desc {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ============ Column Layout ============ */
+.left-column,
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.center-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ============ Gauge Styles ============ */
+.gauge-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.gauge-svg {
+  width: 200px;
+  height: 120px;
+}
+
+.gauge-value {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.gauge-value .value-number {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'SF Mono', monospace;
+  display: block;
+}
+
+.gauge-value .value-label {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.gauge-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 0 10px;
+}
+
+/* ============ Metric Bars ============ */
+.metric-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.metric-fill {
+  height: 100%;
+  border-radius: 2px;
+}
+
+.metric-fill.speed {
+  background: linear-gradient(90deg, #22c55e, #f59e0b);
+}
+
+.metric-fill.density {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+}
+
+.metric-fill.bfield {
+  background: linear-gradient(90deg, #4ecdc4, #22c55e);
+}
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flare-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ============ Wind Metrics ============ */
+.wind-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.wind-metrics .metric-item {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+}
+
+.wind-metrics .metric-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.wind-metrics .metric-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.wind-metrics .metric-unit {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* ============ Info Cards ============ */
+.info-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+}
+
+.info-icon {
+  font-size: 20px;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.info-label {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}

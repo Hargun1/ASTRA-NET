@@ -1,0 +1,41 @@
+# Render Blueprint - ASTRA NET Deployment
+# https://render.com/docs/blueprint-spec
+
+services:
+  # Backend API Service
+  - type: web
+    name: astra-net-backend
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node server.js
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+
+  # Frontend Static Site
+  - type: web
+    name: astra-net-frontend
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./build
+    plan: free
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: REACT_APP_NASA_API_KEY
+        value: fARmnpKihXKQDPEsQPYofg8YDnEVU8JAMIoMZdH6
+      - key: REACT_APP_API_URL
+        sync: false

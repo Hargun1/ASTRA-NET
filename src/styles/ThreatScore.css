@@ -1,0 +1,143 @@
+.threat-score-container {
+  width: 100%;
+  max-width: 900px;
+  margin-top: auto;
+}
+
+.threat-score-card {
+  background: rgba(14, 17, 40, 0.8);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.threat-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.score-display {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.circular-progress {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-svg {
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 0 10px rgba(224, 165, 84, 0.2));
+}
+
+.score-value {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.score-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 56px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.score-unit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.threat-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border-left: 3px solid var(--accent-gold);
+}
+
+.detail-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.detail-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.threat-indicators {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+}
+
+@media (max-width: 768px) {
+  .threat-score-card {
+    padding: 24px;
+  }
+
+  .score-display {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .circular-progress {
+    width: 160px;
+    height: 160px;
+  }
+
+  .score-number {
+    font-size: 44px;
+  }
+
+  .threat-indicators {
+    flex-direction: column;
+  }
+}

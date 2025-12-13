@@ -1,0 +1,802 @@
+/* ============================================
+   ASTRA NET - Login Page
+   Premium • Cinematic • Immersive
+   ============================================ */
+
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+  background: #030608;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============ Cosmic Background ============ */
+.cosmic-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(78, 205, 196, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(78, 205, 196, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+/* ============ Main Layout ============ */
+.login-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  max-width: 1200px;
+  width: 100%;
+  padding: 40px;
+}
+
+/* ============ Brand Section (Left) ============ */
+.brand-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 500px;
+}
+
+.brand-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ============ Animated Logo ============ */
+.logo-wrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin-bottom: 48px;
+}
+
+.logo-rings {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 1px solid;
+}
+
+.ring-1 {
+  width: 180px;
+  height: 180px;
+  margin: -90px 0 0 -90px;
+  border-color: rgba(78, 205, 196, 0.2);
+  animation: rotate 20s linear infinite;
+}
+
+.ring-2 {
+  width: 140px;
+  height: 140px;
+  margin: -70px 0 0 -70px;
+  border-color: rgba(212, 180, 117, 0.15);
+  animation: rotate 15s linear infinite reverse;
+}
+
+.ring-3 {
+  width: 100px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+  border-color: rgba(139, 92, 246, 0.1);
+  animation: rotate 25s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.logo-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+}
+
+.core-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #f0d78c 0%, #d4b475 40%, #a89055 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 60px rgba(212, 180, 117, 0.4),
+    0 0 120px rgba(212, 180, 117, 0.2),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 8px 20px rgba(255, 255, 255, 0.1);
+}
+
+.core-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(212, 180, 117, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.5); opacity: 0; }
+}
+
+.orbit-dot {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: 0 0 20px currentColor;
+}
+
+.dot-1 {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #4ecdc4, #2dd4bf);
+  color: rgba(78, 205, 196, 0.6);
+  top: 50%;
+  left: 0;
+  margin: -6px 0 0 -6px;
+  animation: orbit1 20s linear infinite;
+}
+
+.dot-2 {
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #d4b475, #f0d78c);
+  color: rgba(212, 180, 117, 0.6);
+  top: 50%;
+  left: 0;
+  margin: -4px 0 0 16px;
+  animation: orbit2 15s linear infinite reverse;
+}
+
+.dot-3 {
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+  color: rgba(139, 92, 246, 0.6);
+  top: 50%;
+  left: 0;
+  margin: -5px 0 0 36px;
+  animation: orbit3 25s linear infinite;
+}
+
+@keyframes orbit1 {
+  from { transform: rotate(0deg) translateX(90px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(90px) rotate(-360deg); }
+}
+
+@keyframes orbit2 {
+  from { transform: rotate(0deg) translateX(70px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
+}
+
+@keyframes orbit3 {
+  from { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+}
+
+/* ============ Brand Title ============ */
+.brand-title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.title-line {
+  font-size: 72px;
+  font-weight: 800;
+  letter-spacing: 16px;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.title-line.accent {
+  background: linear-gradient(135deg, #4ecdc4 0%, #2dd4bf 50%, #14b8a6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-tagline {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 48px;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+/* ============ Features ============ */
+.brand-features {
+  display: flex;
+  gap: 32px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.feature:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
+}
+
+.feature-icon {
+  font-size: 20px;
+}
+
+.feature span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ============ Brand Footer ============ */
+.brand-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.powered-by {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.isro-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #d4b475;
+  letter-spacing: 4px;
+}
+
+/* ============ Form Section (Right) ============ */
+.form-section {
+  width: 440px;
+  flex-shrink: 0;
+}
+
+.form-card {
+  background: rgba(10, 15, 25, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 40px;
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(78, 205, 196, 0.3), transparent);
+}
+
+.card-header {
+  margin-bottom: 32px;
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 20px;
+  font-size: 11px;
+  color: #22c55e;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ============ Form Header ============ */
+.form-header {
+  margin-bottom: 32px;
+}
+
+.form-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.form-header p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.6;
+}
+
+.form-header strong {
+  color: #4ecdc4;
+}
+
+/* ============ Input Field ============ */
+.input-field {
+  margin-bottom: 24px;
+}
+
+.input-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 18px;
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  transition: color 0.3s ease;
+  z-index: 2;
+}
+
+.input-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 18px 18px 18px 56px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.input-container input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.input-container input:focus {
+  border-color: rgba(78, 205, 196, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 4px rgba(78, 205, 196, 0.1);
+}
+
+.input-container input:focus + .input-glow {
+  opacity: 1;
+}
+
+.input-container:focus-within .input-icon {
+  color: #4ecdc4;
+}
+
+.input-glow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* ============ OTP Field ============ */
+.otp-field {
+  margin-bottom: 24px;
+}
+
+.otp-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.otp-digit {
+  width: 54px;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  font-family: 'SF Mono', 'JetBrains Mono', monospace;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.otp-digit:focus {
+  border-color: #4ecdc4;
+  background: rgba(78, 205, 196, 0.05);
+  box-shadow: 0 0 0 4px rgba(78, 205, 196, 0.1);
+  transform: translateY(-4px);
+}
+
+.otp-digit.filled {
+  border-color: rgba(78, 205, 196, 0.4);
+  background: rgba(78, 205, 196, 0.08);
+}
+
+/* ============ Error Alert ============ */
+.error-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.error-alert svg {
+  width: 18px;
+  height: 18px;
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+.error-alert span {
+  font-size: 13px;
+  color: #fca5a5;
+}
+
+/* ============ Submit Button ============ */
+.submit-btn {
+  width: 100%;
+  height: 56px;
+  position: relative;
+  background: transparent;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #4ecdc4 0%, #2dd4bf 50%, #14b8a6 100%);
+  border-radius: 16px;
+  transition: all 0.4s ease;
+}
+
+.submit-btn:hover .btn-bg {
+  box-shadow: 0 8px 32px rgba(78, 205, 196, 0.3);
+}
+
+.btn-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.submit-btn:hover .btn-bg::before {
+  transform: translateX(100%);
+}
+
+.btn-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #030608;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.btn-content svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover .btn-content svg {
+  transform: translateX(4px);
+}
+
+/* ============ Loader ============ */
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(3, 6, 8, 0.2);
+  border-top-color: #030608;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============ Security Note ============ */
+.security-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+
+.security-note svg {
+  width: 16px;
+  height: 16px;
+  color: rgba(78, 205, 196, 0.6);
+}
+
+.security-note span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.5px;
+}
+
+/* ============ OTP Actions ============ */
+.otp-actions {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.countdown {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.resend-btn,
+.change-email-btn {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: #4ecdc4;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.resend-btn:hover,
+.change-email-btn:hover {
+  background: rgba(78, 205, 196, 0.1);
+}
+
+.change-email-btn {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.change-email-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ============ Card Footer ============ */
+.card-footer {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.secure-hint {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: rgba(78, 205, 196, 0.08);
+  border: 1px solid rgba(78, 205, 196, 0.15);
+  border-radius: 20px;
+}
+
+.secure-hint span {
+  font-size: 11px;
+  color: #4ecdc4;
+  letter-spacing: 0.5px;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 1100px) {
+  .login-wrapper {
+    flex-direction: column;
+    gap: 48px;
+    padding: 24px;
+  }
+
+  .brand-section {
+    min-height: auto;
+    align-items: center;
+  }
+
+  .brand-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .brand-tagline {
+    text-align: center;
+  }
+
+  .brand-features {
+    justify-content: center;
+  }
+
+  .title-line {
+    font-size: 48px;
+    letter-spacing: 10px;
+  }
+
+  .logo-wrapper {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 32px;
+  }
+
+  .ring-1 {
+    width: 140px;
+    height: 140px;
+    margin: -70px 0 0 -70px;
+  }
+
+  .ring-2 {
+    width: 110px;
+    height: 110px;
+    margin: -55px 0 0 -55px;
+  }
+
+  .ring-3 {
+    width: 80px;
+    height: 80px;
+    margin: -40px 0 0 -40px;
+  }
+
+  .logo-core {
+    width: 48px;
+    height: 48px;
+  }
+
+  @keyframes orbit1 {
+    from { transform: rotate(0deg) translateX(70px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
+  }
+
+  @keyframes orbit2 {
+    from { transform: rotate(0deg) translateX(55px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(55px) rotate(-360deg); }
+  }
+
+  @keyframes orbit3 {
+    from { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
+  }
+
+  .form-section {
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .brand-footer {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .title-line {
+    font-size: 36px;
+    letter-spacing: 6px;
+  }
+
+  .brand-features {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .form-card {
+    padding: 28px 24px;
+  }
+
+  .otp-digit {
+    width: 44px;
+    height: 54px;
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,1261 @@
+/* ============================================
+   ASTRA KAKSHA - Orbital Analysis
+   Minimal • Sophisticated • Smooth
+   ============================================ */
+
+.astra-kaksha {
+  min-height: 100vh;
+  position: relative;
+  background: #030608;
+}
+
+.kaksha-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 50% 30%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 70%, rgba(78, 205, 196, 0.02) 0%, transparent 50%);
+  z-index: 0;
+}
+
+/* ============ Header ============ */
+.kaksha-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 32px;
+  background: rgba(3, 6, 8, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.back-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.header-center {
+  text-align: center;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.page-title .icon {
+  font-size: 20px;
+}
+
+.page-subtitle {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tracking-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 14px;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 10px;
+}
+
+.tracking-count {
+  font-size: 16px;
+  font-weight: 700;
+  color: #8b5cf6;
+  font-family: 'SF Mono', monospace;
+}
+
+.tracking-label {
+  font-size: 7px;
+  color: rgba(139, 92, 246, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.maneuver-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 8px;
+}
+
+.maneuver-icon {
+  font-size: 12px;
+}
+
+.maneuver-text {
+  font-size: 9px;
+  font-weight: 600;
+  color: #f59e0b;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: rgba(139, 92, 246, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8b5cf6;
+  animation: soft-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes soft-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ============ Main Content ============ */
+.kaksha-content {
+  position: relative;
+  z-index: 10;
+  padding: 28px;
+}
+
+.kaksha-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr 320px;
+  gap: 20px;
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+.left-panel,
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ============ Panel Base ============ */
+.panel {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  padding: 22px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.panel-title {
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+}
+
+/* ============ Conjunction Panel ============ */
+.conjunction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.conjunction-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  border-left: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.conjunction-item:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.conj-severity {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.conj-details {
+  flex: 1;
+}
+
+.conj-objects {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.obj-a, .obj-b {
+  font-size: 11px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.conj-vs {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+}
+
+.conj-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.conj-status {
+  font-size: 8px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.conj-status.high {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.conj-status.moderate {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+.conj-status.low {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+}
+
+/* ============ Satellite Health Panel ============ */
+.satellite-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.satellite-item {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-left: 2px solid transparent;
+}
+
+.satellite-item:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.satellite-item.selected {
+  background: rgba(139, 92, 246, 0.08);
+  border-left-color: #8b5cf6;
+}
+
+.sat-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.sat-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.sat-orbit {
+  font-size: 8px;
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sat-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sat-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sat-status .status-dot {
+  width: 5px;
+  height: 5px;
+}
+
+.sat-signal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.signal-label {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  min-width: 40px;
+}
+
+.signal-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.signal-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.signal-value {
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'SF Mono', monospace;
+  min-width: 32px;
+  text-align: right;
+}
+
+/* ============ Orbit Visualization Container ============ */
+.orbit-container {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.orbit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.orbit-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.orbit-legend {
+  display: flex;
+  gap: 14px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.legend-item .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.legend-item .dot.leo { background: #4ecdc4; }
+.legend-item .dot.meo { background: #f59e0b; }
+.legend-item .dot.geo { background: #8b5cf6; }
+.legend-item .dot.debris { background: #666666; }
+
+.orbit-wrapper {
+  flex: 1;
+  min-height: 420px;
+  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.02) 0%, transparent 60%);
+}
+
+.orbit-controls-hint {
+  padding: 10px;
+  text-align: center;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* ============ Density Panel ============ */
+.density-chart {
+  margin-bottom: 16px;
+}
+
+.density-summary {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.density-stat {
+  text-align: center;
+}
+
+.density-stat .stat-value {
+  display: block;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'SF Mono', monospace;
+}
+
+.density-stat .stat-label {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ============ Weather Impact Panel ============ */
+.impact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.impact-item {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+}
+
+.impact-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.impact-icon {
+  font-size: 14px;
+}
+
+.impact-name {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.impact-status {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.impact-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.impact-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============ Quick Stats Panel ============ */
+.quick-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quick-stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.quick-stat:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.stat-icon {
+  font-size: 18px;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-content .stat-value {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  font-family: 'SF Mono', monospace;
+}
+
+.stat-content .stat-label {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 1400px) {
+  .kaksha-grid {
+    grid-template-columns: 280px 1fr 280px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .kaksha-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .orbit-container {
+    order: -1;
+  }
+  
+  .orbit-wrapper {
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .kaksha-header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .kaksha-content {
+    padding: 16px;
+  }
+  
+  .orbit-legend {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+/* ============ Center Area ============ */
+.center-area {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ============ Alert Tabs Panel ============ */
+.alerts-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.alert-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.alert-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.alert-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.alert-tab.active::after {
+  background: #8b5cf6;
+}
+
+.alert-tab:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.alert-tab.active {
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.tab-icon {
+  font-size: 16px;
+}
+
+.tab-label {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.alert-tab.active .tab-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.tab-count {
+  font-size: 10px;
+  font-weight: 600;
+  color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.15);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', monospace;
+}
+
+.alert-content {
+  padding: 18px;
+}
+
+/* ============ Orbital Decay Panel ============ */
+.decay-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.decay-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  position: relative;
+}
+
+.decay-icon {
+  font-size: 20px;
+}
+
+.decay-info {
+  flex: 1;
+}
+
+.decay-object {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.decay-orbit {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.decay-metrics {
+  display: flex;
+  gap: 16px;
+}
+
+.decay-rate,
+.decay-eta {
+  text-align: center;
+}
+
+.rate-label,
+.eta-label {
+  display: block;
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.rate-value,
+.eta-value {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'SF Mono', monospace;
+  color: #fff;
+}
+
+.drag-alert {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: rgba(239, 68, 68, 0.15);
+  border-radius: 4px;
+}
+
+.drag-icon {
+  font-size: 10px;
+}
+
+.drag-text {
+  font-size: 8px;
+  font-weight: 700;
+  color: #ef4444;
+  letter-spacing: 0.5px;
+}
+
+/* ============ Debris Hotspots ============ */
+.hotspot-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hotspot-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+}
+
+.hotspot-region {
+  flex: 1;
+}
+
+.region-name {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.region-altitude {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.hotspot-density {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 120px;
+}
+
+.density-bar-container {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.density-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+.density-value {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'SF Mono', monospace;
+  min-width: 32px;
+  text-align: right;
+}
+
+.hotspot-count {
+  text-align: center;
+  min-width: 50px;
+}
+
+.count-number {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'SF Mono', monospace;
+}
+
+.count-label {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============ Vulnerability Panel ============ */
+.vulnerability-panel {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(239, 68, 68, 0.03) 100%);
+  border-color: rgba(139, 92, 246, 0.1);
+}
+
+.vulnerability-gauge {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.vulnerability-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  text-align: center;
+}
+
+.vuln-number {
+  display: block;
+  font-size: 36px;
+  font-weight: 700;
+  font-family: 'SF Mono', monospace;
+}
+
+.vuln-label {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.vulnerability-factors {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.factor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.factor-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  min-width: 100px;
+}
+
+.factor-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.factor-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.8s ease;
+}
+
+/* ============ Satellite Health Updates ============ */
+.sat-metrics {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sat-vuln-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+}
+
+.vuln-score-value {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'SF Mono', monospace;
+}
+
+.vuln-score-label {
+  font-size: 7px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.drag-badge {
+  font-size: 8px;
+  font-weight: 700;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  padding: 4px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* ============ Operator Alert Panel ============ */
+.operator-panel {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.operator-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.operator-alert {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.operator-alert:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.operator-alert.expanded {
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.operator-alert .alert-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.alert-type-badge {
+  font-size: 8px;
+  font-weight: 700;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.alert-operator {
+  flex: 1;
+  font-size: 11px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.alert-timestamp {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.alert-message {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.alert-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 9px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.action-btn.acknowledge:hover {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+}
+
+.action-btn.escalate:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+/* ============ Collision Matrix ============ */
+.collision-matrix {
+  margin-bottom: 14px;
+}
+
+.matrix-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.matrix-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  width: 32px;
+  text-align: right;
+}
+
+.matrix-cells {
+  display: flex;
+  gap: 6px;
+}
+
+.matrix-cell {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  cursor: default;
+}
+
+.matrix-cell.high {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+.matrix-cell.moderate {
+  background: rgba(245, 158, 11, 0.3);
+}
+
+.matrix-cell.low {
+  background: rgba(34, 197, 94, 0.3);
+}
+
+.matrix-axis {
+  display: flex;
+  gap: 6px;
+  margin-left: 42px;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.matrix-axis span {
+  width: 32px;
+  text-align: center;
+}
+
+.matrix-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.matrix-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.legend-dot.high {
+  background: rgba(239, 68, 68, 0.6);
+}
+
+.legend-dot.moderate {
+  background: rgba(245, 158, 11, 0.6);
+}
+
+.legend-dot.low {
+  background: rgba(34, 197, 94, 0.6);
+}
+
+/* ============ Orbit Info Panel ============ */
+.orbit-info-panel .quick-stats {
+  gap: 8px;
+}
+
+.orbit-info-panel .quick-stat {
+  padding: 10px;
+}
+
+/* ============ Density Panel Updates ============ */
+.density-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.density-stat {
+  text-align: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+}
+
+/* ============ Scrollbar ============ */
+.operator-alerts::-webkit-scrollbar,
+.satellite-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.operator-alerts::-webkit-scrollbar-track,
+.satellite-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.operator-alerts::-webkit-scrollbar-thumb,
+.satellite-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+/* ============ Responsive Updates ============ */
+@media (max-width: 1100px) {
+  .center-area {
+    order: -1;
+  }
+  
+  .left-panel,
+  .right-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-right {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .left-panel,
+  .right-panel {
+    grid-template-columns: 1fr;
+  }
+  
+  .alert-tabs {
+    flex-wrap: wrap;
+  }
+}
