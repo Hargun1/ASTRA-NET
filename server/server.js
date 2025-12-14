@@ -34,25 +34,29 @@ function generateOTP() {
   return crypto.randomInt(100000, 999999).toString();
 }
 
-// Send email using Resend API (works on Render free tier)
-async function sendEmailWithResend(to, otp) {
-  const RESEND_API_KEY = process.env.RESEND_API_KEY;
+// Send email using Brevo (Sendinblue) API - FREE 300 emails/day, no domain needed
+async function sendEmailWithBrevo(to, otp) {
+  const BREVO_API_KEY = process.env.BREVO_API_KEY;
   
-  if (!RESEND_API_KEY) {
-    throw new Error('RESEND_API_KEY not configured');
+  if (!BREVO_API_KEY) {
+    throw new Error('BREVO_API_KEY not configured');
   }
 
-  const response = await fetch('https://api.resend.com/emails', {
+  const response = await fetch('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${RESEND_API_KEY}`,
-      'Content-Type': 'application/json'
+      'accept': 'application/json',
+      'api-key': BREVO_API_KEY,
+      'content-type': 'application/json'
     },
     body: JSON.stringify({
-      from: 'ASTRA NET <onboarding@resend.dev>',
-      to: [to],
+      sender: {
+        name: 'ASTRA NET',
+        email: process.env.BREVO_SENDER_EMAIL || 'noreply@astranet.space'
+      },
+      to: [{ email: to }],
       subject: '🚀 ASTRA NET - Your Access Code',
-      html: `
+      htmlContent: `
         <!DOCTYPE html>
         <html>
         <body style="margin: 0; padding: 0; background: #0a0a0f; font-family: 'Segoe UI', Arial, sans-serif;">
@@ -87,6 +91,7 @@ async function sendEmailWithResend(to, otp) {
 
   if (!response.ok) {
     const error = await response.json();
+    console.error('Brevo API Error:', error);
     throw new Error(error.message || 'Failed to send email');
   }
 
@@ -147,7 +152,7 @@ app.post('/api/send-otp', async (req, res) => {
     });
 
     // Send email
-    await sendEmailWithResend(email, otp);
+    await sendEmailWithBrevo(email, otp);
     
     console.log(`✅ OTP sent to ${email}`);
     res.json({ success: true, message: 'OTP sent successfully! Check your email.' });
